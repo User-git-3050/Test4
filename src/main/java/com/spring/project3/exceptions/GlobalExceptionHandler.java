@@ -1,10 +1,8 @@
 package com.spring.project3.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +26,14 @@ public class GlobalExceptionHandler {
         Map<String, Object> result = new HashMap<>();
         result.put("errors", errors);
 
+
+        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> illegalArgument(IllegalArgumentException ex, HttpServletRequest request) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("error", "Please write all arguments true");
 
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }

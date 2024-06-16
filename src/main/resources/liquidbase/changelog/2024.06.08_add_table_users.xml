@@ -5,18 +5,19 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-
-    <changeSet id="2024.06.08_add_table_tasks" author="Elvin Mehreliyev">
-        <createTable schemaName="public" tableName="tasks">
+    <changeSet id="2024.06.08_create_enum_role" author="Elvin Mehreliyev">
+        <sql>
+            CREATE TYPE role_enum AS ENUM ('ADMIN', 'USER', 'TESTER');
+        </sql>
+    </changeSet>
+    <changeSet id="2024.06.08_add_table_users" author="Elvin Mehreliyev">
+        <createTable schemaName="public" tableName="users">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="point" type="int"/>
-            <column name="priority" type="int"/>
-            <column name="description" type="varchar(50)"/>
-            <column name="deadline" type="timestamp"/>
-            <column name="status" type="int"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="role" type="role_enum"/>
 
 
         </createTable>

@@ -1,5 +1,6 @@
 package com.spring.project3.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.spring.project3.Enums.PointEnum;
 import com.spring.project3.Enums.TaskPriority;
 import com.spring.project3.Enums.TaskStatusEnum;
@@ -13,7 +14,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-
 @Builder
 @Entity
 @Data
@@ -25,18 +25,23 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Enumerated(EnumType.STRING)
     private PointEnum point;
 
-    private TaskPriority taskPriority;
+    @Enumerated(EnumType.STRING)
+    private TaskPriority priority;
 
     private String description;
 
+
     private LocalDateTime deadline;
 
-    private TaskStatusEnum taskStatus;
+    @Enumerated(EnumType.STRING)
+    private TaskStatusEnum status;
 
 
     @ManyToMany(mappedBy = "userTasks")
+    @JsonBackReference
     private List<User> taskUsers;
 
 }

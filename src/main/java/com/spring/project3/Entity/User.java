@@ -1,6 +1,7 @@
 package com.spring.project3.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.spring.project3.Enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,16 +21,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @Enumerated(EnumType.STRING)
+    private RoleEnum role;
 
     @ManyToMany
     @JoinTable(name = "user_tasks",
-    joinColumns=@JoinColumn(name="user_id"),
-    inverseJoinColumns = @JoinColumn(name = "task_id")
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id")
     )
+    @JsonManagedReference
     private List<Task> userTasks;
 
-    @ManyToOne()
-    @JoinColumn(name="role_id")
-    @JsonManagedReference
-    private Role role;
+
 }

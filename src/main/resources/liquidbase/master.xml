@@ -6,6 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <include file="/liquidbase/changelog/2024.06.08_add_table_tasks.xml"/>
+    <include file="/liquidbase/changelog/2024.06.08_add_table_users.xml"/>
     <include file="/liquidbase/changelog/2024.06.08_add_table_user_tasks.xml"/>
 
 
